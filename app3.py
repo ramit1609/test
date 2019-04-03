@@ -20,8 +20,8 @@ Out,In="",""
 IMG=0
 
 '''loading the resuts saved by symptoms.py file'''
-dise=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"dise.pickle"),"rb"))
-symp=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"symp.pickle"),"rb"))
+#dise=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"dise.pickle"),"rb"))
+#symp=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"symp.pickle"),"rb"))
 
 def check(a,b):
     count=0
@@ -94,8 +94,8 @@ def predict():
 ''' input is the set of initial symptoms seperated by commas and without 
 any trailing or leading spaces
 '''
-MODEL=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"Knn.pickle"),"rb"))
-labels_symptoms=os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"dataset\\symptoms.txt")
+#MODEL=pickle.load(open(os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"Knn.pickle"),"rb"))
+#labels_symptoms=os.path.join("\\".join(os.path.abspath(__file__).split("\\")[:-1]),"dataset\\symptoms.txt")
 
 def solve_overlapp(ans):
     global IMG,Out,output,Input,In,NUM,RETURN
