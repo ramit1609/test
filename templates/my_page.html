@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+  			$('a#process_input').bind('click',function(){
+  				$(".sent").append($('input[name="proglang"]').val());
+  				$(".sent").append("<br>");
+  				$.getJSON('/background_process',{
+  					proglang:$('input[name="proglang"]').val(),
+  				},function(data){
+  					$(".sent").append(data.result);
+  					$(".sent").append("<br>");
+  					document.getElementById('txtLocation').value="";
+  				});
+  				return false;
+  			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(function(e) {
+		    $('a#process_input2').bind('click',function(e){
+		    	e.preventDefault();
+		        var form_data = new FormData($('#upload-file')[0]);
+		        $.ajax({
+		            type: 'POST',
+		            url: '/upload',
+		            data: form_data,
+		            contentType: false,
+		            cache: false,
+		            processData: false,
+		            success: function(data) {
+                		console.log(data);
+                		$(".sent").append(data);
+  						$(".sent").append("<br>");
+            		},
+		        });
+		    });
+		});
+	</script>
+</head>
+
+<body class="body">
+	<div>
+		<form method="GET">
+			<h2>Disease Predictor</h2>
+			<input type="text" id="txtLocation" size=20 list="suggest" name="proglang">
+			<a href="#" id="process_input"><button>Submit</button></a>
+		</form>
+	</div>
+	<br>
+	<form id="upload-file" method="POST" enctype="multipart/form-data">
+        <label for="file">Select a file</label>
+        <input name=file type=file>
+        <a href="#" id="process_input2"><button>Submit</button></a>
+	</form>
+ <p id=result></p>
+<div class="sent"></div>
+
+</body>
+
+</html>

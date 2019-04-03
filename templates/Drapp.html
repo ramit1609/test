@@ -1,0 +1,79 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+<head>
+  <meta charset="utf-8"/>
+  <title>Dr app</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel = "stylesheet"
+   type = "text/css"
+   href = "mystylefordrapp.css"/>
+</head>
+<body>
+<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+
+<div class="box">
+    <ui:insert name="header">
+	   <img src="C:\Users\Amit Raj\Desktop\first.JPG" alt="logo" />
+	   <marquee >DR APP -  A place where you get your symptoms a name.</marquee>
+	   <button>Print</button>
+    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+    	<!-- <ui:include src="header.xhtml"/> -->
+    </ui:insert>
+</div>
+
+
+<div class="box1">
+  <ui:insert name="content">
+  <div class="fieldset">
+    	<form >
+		       <textarea readonly id="outputtext" col="2" rows="20" style="background-image:url(chat7.jpg);width:987px;height:250px ;text-align:left"; >
+		       </textarea>
+			   
+			   <img src="" id="imgFile" />
+			   <div id="textarea" readonly>
+
+             <img contenteditable="false" style="width:200px" id="myimg" />
+                </div>
+		   	
+		</form>
+  </div>
+  <div class="fieldleft">
+         <img src="C:\Users\hitzz\Desktop\html\flask server\templates\chat.JPG" alt="logo" border="2px solid red" width="333px" height="240px"/>
+		 <img src="C:\Users\hitzz\Desktop\html\flask server\templates\chat2.JPG" alt="logo" border="2px solid red" width="333px" height="271px"/>
+  </div>
+       
+    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
+	  	<!-- <div> -->
+    	<!-- <ui:include src="content.xhtml"/> -->  
+    	<!-- </div> -->
+  </ui:insert>
+</div>
+
+<div class="box2">
+  <ui:insert name="footer">
+        <form autocomplete="off" method="GET" >
+		     <fieldset  class="autocomplete">  
+			<input id="myInput" type="text" name="myCountry" placeholder="Enter your symptoms"  style="height:30px ; width:56%;position:relative;margin-left:320px">
+			<a href="#" id="process_input"><button type="button" style="height:25px;width:60px;cursor:pointer;position:relative">Submit</button></a>
+			<input id="imgSel" class="file" type="file" name="fileupload" style="height:22px ; width:140px;position:relative" onchange="getFile(event)">
+			 </fieldset>
+		 		
+		   
+		</form>
+    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+		<!--<ui:include src="footer.xhtml"/>  -->
+  </ui:insert>
+</div>
+   <script type="text/javascript" src="C:\Users\hitzz\Desktop\html\flask server\templates\js\jquery.js"> </script>
+   <script type="text/javascript" src="C:\Users\hitzz\Desktop\html\flask server\templates\js\appscript.js"> </script>
+   <script>
+    var name=localStorage.getItem("firstname");
+	document.getElementById('outputtext').innerHTML ="hi "+ name +"\n"+ "This is your personal doctor."+ "\n"+"Feel free to write down any symptoms you feel."+"\n" ;
+    
+   </script> 
+</body>
+</html>

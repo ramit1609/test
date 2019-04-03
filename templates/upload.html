@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var x='x';
+  			$('a#process_input').bind('click',function(){
+  				var s='<div class="sentbo'+x+'"'+' style="border:10px solid transparent;border-radius:45%;text-align:center;float:right;font-size: 20px;width:49%;background-color:#e4ffce;" >'
+  				$(".sent").append(s);
+  				var cls='.sentbo'+x
+  				$(cls).append($('input[name="proglang"]').val());
+  				$(cls).append("<br>");
+  				x=x+'x';
+  				$.getJSON('/background_process',{
+  					proglang:$('input[name="proglang"]').val(),
+  				},function(data){
+  					$(".sent").append(data);
+  					$(".sent").append("<br>");
+  					document.getElementById('txtLocation').value="";
+  				});
+  				return false;
+  			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(function(e) {
+		    $('a#process_input2').bind('click',function(e){
+		    	e.preventDefault();
+		        var form_data = new FormData($('#upload-file')[0]);
+		        $.ajax({
+		            type: 'POST',
+		            url: '/upload',
+		            data: form_data,
+		            contentType: false,
+		            cache: false,
+		            processData: false,
+		            success: function(data) {
+                		console.log(data);
+                		$(".sent").append(data);
+  						$(".sent").append("<br>");
+
+
+            		},
+		        });
+		    });
+		});
+	</script>
+	<script type="text/javascript">
+			function readURL(input) {
+	            if (input.files && input.files[0]) {
+	                var reader = new FileReader();
+
+	                reader.onload = function (e) {
+	                    $('#blah')
+	                        .attr('src', e.target.result)
+	                        .width(150)
+	                        .height(200);
+	                };
+	                var d = new Date();
+	                d=d.getSeconds()
+	                var s='<img id="blah" name="h'+d.toString() +'"'+ 'src="#" alt="" style="float:right;border:3px solid red;border-width: 51%;" />'
+	                $(".sent").append(s)
+	                reader.readAsDataURL(input.files[0]);
+	            }
+	        }
+	</script>
+</head>
+
+<body class="body">
+	
+	<div style="width:100%;height:40px ;border:1px solid transparent;background-color:#23ce10;padding-bottom:10px;padding-top:5px;border-top-left-radius:20px;border-top-right-radius:20px;  ">
+		<form method="GET">
+			<h2 style="margin-left:19px;">Dr App</h2>
+			<input type="text" id="txtLocation" size=20 list="suggest" name="proglang" placeholder="Enter the symptom and for a query reply with yes or no" style="width:50%;height:25px;border-radius:20px;margin-top:630px;">
+			<a href="#" id="process_input"><button style="border-radius:20px;width:60px;text-align: center;font-family: Arial;height:25px">Submit</button></a>
+		</form>
+   </div>
+
+ <div class="sent" style="border: 1px solid gray;width:100%;height:636px;position:relative;-moz-appearance: textfield-multiline;-webkit-appearance: textarea; font: medium -moz-fixed; font: -webkit-small-control; overflow: auto;padding: 2px; resize:none;overflow:scroll;">
+
+ </div>
+     
+     <div style="border:1px solid transparent;background-color:#42f4e5;width: 100%;border-bottom-left-radius:10px;border-bottom-right-radius:10px; ">
+	<form id="upload-file" method="POST" enctype="multipart/form-data">
+        <label for="file" style="height:25px;margin-left:65%;">Select an Image</label>
+        <input id="imgSel" class="file" type="file" name="file" onchange="readURL(this)" style="height:28px ; width:180px;position:relative;margin-top:08px;border-radius: 10px;">
+        <a href="#" id="process_input2"><button style="margin-left: 10px;height:29px;width:60px;border-radius: 15px;">Submit</button></a>
+	</form>
+</div>   
+   
+</body>
+
+</html>
